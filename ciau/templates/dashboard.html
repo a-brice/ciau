@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+{% block title %}Tableau de bord — CIAU{% endblock %}
+{% block page_id %}dashboard{% endblock %}
+
+{% block content %}
+<div class="px-6 py-6 max-w-screen-xl mx-auto">
+
+  <!-- Header -->
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+    <div>
+      <h1 class="text-xl font-bold text-slate-900">Projets en cours</h1>
+      <p class="text-sm text-slate-500 mt-0.5">Vue d'ensemble de tous les projets actifs</p>
+    </div>
+    <a href="{{ url('project_create') }}"
+       class="inline-flex items-center gap-2 px-4 py-2 bg-slate-900 text-white text-sm font-medium rounded-lg hover:bg-slate-800 transition-colors">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+      </svg>
+      Nouveau projet
+    </a>
+  </div>
+
+  <!-- KPI cards -->
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+    <div class="bg-white rounded-xl border border-slate-200 p-5">
+      <p class="text-xs font-medium text-slate-500 uppercase tracking-wide">Projets en cours</p>
+      <p class="mt-1 text-3xl font-bold text-slate-900">{{ nb_en_cours }}</p>
+    </div>
+    <div class="bg-white rounded-xl border border-slate-200 p-5">
+      <p class="text-xs font-medium text-slate-500 uppercase tracking-wide">Livrables en retard</p>
+      <p class="mt-1 text-3xl font-bold {% if nb_overdue_deliverables > 0 %}text-red-600{% else %}text-slate-900{% endif %}">
+        {{ nb_overdue_deliverables }}
+      </p>
+    </div>
+    <div class="bg-white rounded-xl border border-slate-200 p-5">
+      <p class="text-xs font-medium text-slate-500 uppercase tracking-wide">Acomptes en retard</p>
+      <p class="mt-1 text-3xl font-bold {% if nb_late_payments > 0 %}text-amber-600{% else %}text-slate-900{% endif %}">
+        {{ nb_late_payments }}
+      </p>
+    </div>
+  </div>
+
+  <!-- Filters -->
+  <form method="get" class="flex flex-wrap gap-3 mb-5">
+    <input type="text" name="q" value="{{ q | default('') }}"
+           placeholder="Rechercher…"
+           class="px-3 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-900 w-56">
+
+    <select name="etat" onchange="this.form.submit()"
+            class="px-3 py-2 text-sm border border-slate-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-slate-900">
+      <option value="">Tous les états</option>
+      {% for val, label in etat_choices %}
+        {% if val != 'archive' %}
+        <option value="{{ val }}" {% if current_etat == val %}selected{% endif %}>{{ label }}</option>
+        {% endif %}
+      {% endfor %}
+    </select>
+
+    <button type="submit"
+            class="px-4 py-2 text-sm bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-colors">
+      Filtrer
+    </button>
+    {% if current_etat or q %}
+    <a href="{{ url('dashboard') }}"
+       class="px-4 py-2 text-sm text-slate-600 border border-slate-300 rounded-lg hover:bg-slate-50 transition-colors">
+      Réinitialiser
+    </a>
+    {% endif %}
+  </form>
+
+  <!-- Table -->
+  <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+    {% if projects %}
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="bg-slate-50 border-b border-slate-200">
+            <th class="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wide">Référence</th>
+            <th class="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wide">Désignation</th>
+            <th class="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wide hidden md:table-cell">Maître d'ouvrage</th>
+            <th class="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wide hidden lg:table-cell">Contrat MOE</th>
+            <th class="px-4 py-3 text-center text-xs font-semibold text-slate-500 uppercase tracking-wide">État</th>
+            <th class="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wide hidden lg:table-cell">Phase</th>
+            <th class="px-4 py-3"></th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100">
+          {% for p in projects %}
+          <tr class="hover:bg-slate-50 transition-colors">
+            <td class="px-4 py-3 font-mono text-xs text-slate-600 whitespace-nowrap">{{ p.reference }}</td>
+            <td class="px-4 py-3 font-medium text-slate-900 max-w-xs">
+              <span class="line-clamp-2">{{ p.designation }}</span>
+              {% if p.potentiel %}
+              <span class="inline-block mt-0.5 px-1.5 py-0.5 text-xs bg-violet-100 text-violet-700 rounded">Potentiel</span>
+              {% endif %}
+            </td>
+            <td class="px-4 py-3 text-slate-600 hidden md:table-cell">{{ p.maitre_ouvrage | default('—') }}</td>
+            <td class="px-4 py-3 text-slate-600 hidden lg:table-cell">
+              {% if p.contrat_moe %}
+              <span class="text-xs">{{ p.get_contrat_moe_display() }}</span>
+              {% else %}—{% endif %}
+            </td>
+            <td class="px-4 py-3 text-center">
+              {% if p.etat == 'en_cours' %}
+              <span class="badge-green">En cours</span>
+              {% elif p.etat == 'dormant' %}
+              <span class="badge-amber">Dormant</span>
+              {% else %}
+              <span class="badge-slate">Archivé</span>
+              {% endif %}
+            </td>
+            <td class="px-4 py-3 text-slate-600 hidden lg:table-cell text-xs">
+              {{ p.phase_actuelle | default('—') }}
+            </td>
+            <td class="px-4 py-3 text-right">
+              <a href="{{ url('project_detail', kwargs={'pk': p.pk}) }}"
+                 class="text-xs font-medium text-slate-900 hover:text-slate-600 underline-offset-2 hover:underline">
+                Ouvrir
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <div class="py-16 text-center">
+      <svg class="mx-auto w-12 h-12 text-slate-300 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+              d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+      </svg>
+      <p class="text-slate-500 text-sm">Aucun projet trouvé.</p>
+      <a href="{{ url('project_create') }}" class="mt-3 inline-block text-sm text-slate-900 font-medium hover:underline">
+        Créer un projet →
+      </a>
+    </div>
+    {% endif %}
+  </div>
+
+</div>
+{% endblock %}

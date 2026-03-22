@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% block title %}Activités — Semaine du {{ monday.strftime('%d/%m/%Y') }}{% endblock %}
+{% block page_id %}activities{% endblock %}
+
+{% block content %}
+<div class="px-6 py-6 max-w-screen-xl mx-auto">
+
+  <!-- Header -->
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+    <div>
+      <h1 class="text-xl font-bold text-slate-900">Fiche activité hebdomadaire</h1>
+      <p class="text-sm text-slate-500 mt-0.5">
+        Semaine du {{ monday.strftime('%d/%m/%Y') }} au {{ friday.strftime('%d/%m/%Y') }}
+      </p>
+    </div>
+
+    <!-- Week navigation -->
+    <div class="flex items-center gap-2">
+      <a href="?semaine={{ prev_week.isoformat() }}"
+         class="p-2 border border-slate-300 rounded-lg text-slate-600 hover:bg-slate-50 transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+      </a>
+      <form method="get" class="flex items-center">
+        <input type="date" name="semaine" value="{{ monday.isoformat() }}"
+               onchange="this.form.submit()"
+               class="form-input text-sm py-1.5">
+      </form>
+      <a href="?semaine={{ next_week.isoformat() }}"
+         class="p-2 border border-slate-300 rounded-lg text-slate-600 hover:bg-slate-50 transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+        </svg>
+      </a>
+      <a href="?" class="px-3 py-1.5 text-sm border border-slate-300 rounded-lg text-slate-600 hover:bg-slate-50">
+        Aujourd'hui
+      </a>
+    </div>
+  </div>
+
+  <!-- Activities grid by stakeholder -->
+  <div class="space-y-4 mb-8">
+    {% for stakeholder in stakeholders %}
+    {% set acts = activities_by_stakeholder.get(stakeholder.pk, []) %}
+    <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+      <!-- Stakeholder header -->
+      <div class="flex items-center gap-3 px-5 py-3 bg-slate-50 border-b border-slate-200">
+        <div class="w-8 h-8 rounded-full bg-slate-900 text-white flex items-center justify-center text-xs font-bold shrink-0">
+          {{ stakeholder.nom[0] }}
+        </div>
+        <div>
+          <p class="text-sm font-semibold text-slate-900">{{ stakeholder.nom }}</p>
+          <p class="text-xs text-slate-500">{{ stakeholder.poste }}</p>
+        </div>
+      </div>
+
+      <!-- Activities for this stakeholder -->
+      {% if acts %}
+      <div class="divide-y divide-slate-100">
+        {% for act in acts %}
+        <div class="flex items-start gap-4 px-5 py-3">
+          <div class="flex-1 min-w-0">
+            <p class="text-sm text-slate-900">{{ act.activite }}</p>
+            {% if act.project %}
+            <p class="text-xs text-slate-400 mt-0.5">
+              Projet : {{ act.project.reference }}
+            </p>
+            {% endif %}
+            {% if act.observations %}
+            <p class="text-xs text-slate-500 mt-0.5 italic">{{ act.observations }}</p>
+            {% endif %}
+          </div>
+          {% if act.delai %}
+          <div class="shrink-0 text-right">
+            <p class="text-xs text-slate-500">Délai</p>
+            <p class="text-xs font-medium text-slate-900">{{ act.delai.strftime('%d/%m/%Y') }}</p>
+          </div>
+          {% endif %}
+          <form method="post" action="{{ url('activity_delete', kwargs={'aid': act.pk}) }}"
+                onsubmit="return confirm('Supprimer cette activité ?')">
+            {{ csrf_input }}
+            <button type="submit" class="text-slate-300 hover:text-red-500 transition-colors mt-0.5">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+              </svg>
+            </button>
+          </form>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p class="px-5 py-4 text-sm text-slate-400 italic">Aucune activité enregistrée pour cette semaine.</p>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- Add activity form -->
+  <div class="bg-white rounded-xl border border-slate-200 p-5">
+    <h2 class="text-sm font-semibold text-slate-900 mb-4">Saisir une activité</h2>
+    <form method="post" action="{{ url('activities_week') }}" class="space-y-3">
+      {{ csrf_input }}
+      <input type="hidden" name="semaine_debut" value="{{ monday.isoformat() }}">
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs text-slate-600 mb-1">Intervenant</label>
+          <select name="stakeholder" class="form-input w-full text-sm" required>
+            {% for s in stakeholders %}
+            <option value="{{ s.pk }}">{{ s.nom }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs text-slate-600 mb-1">Projet lié (optionnel)</label>
+          <select name="project" class="form-input w-full text-sm">
+            <option value="">— Aucun —</option>
+            {% for p in form.fields.project.queryset %}
+            <option value="{{ p.pk }}">{{ p.reference }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-xs text-slate-600 mb-1">Activité</label>
+        <textarea name="activite" rows="2" class="form-input w-full text-sm" required
+                  placeholder="Description de l'activité réalisée…"></textarea>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs text-slate-600 mb-1">Délai associé</label>
+          <input type="date" name="delai" class="form-input w-full text-sm">
+        </div>
+        <div>
+          <label class="block text-xs text-slate-600 mb-1">Observations</label>
+          <input type="text" name="observations" class="form-input w-full text-sm"
+                 placeholder="Commentaires libres…">
+        </div>
+      </div>
+
+      <button type="submit"
+              class="px-5 py-2 bg-slate-900 text-white text-sm font-medium rounded-lg hover:bg-slate-800 transition-colors">
+        Enregistrer l'activité
+      </button>
+    </form>
+  </div>
+
+</div>
+{% endblock %}

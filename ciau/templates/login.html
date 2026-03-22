@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connexion — CIAU Architecture</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="h-full bg-slate-100 flex items-center justify-center">
+
+  <div class="w-full max-w-sm">
+
+    <!-- Logo block -->
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-slate-900 mb-4">
+        <span class="text-white text-2xl font-bold tracking-tighter">CA</span>
+      </div>
+      <h1 class="text-2xl font-bold text-slate-900">CIAU Architecture</h1>
+      <p class="text-sm text-slate-500 mt-1">Gestion de projets</p>
+    </div>
+
+    <!-- Card -->
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
+
+      {% if error %}
+      <div class="mb-5 px-4 py-3 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm">
+        Mot de passe incorrect. Veuillez réessayer.
+      </div>
+      {% endif %}
+
+      <form method="post" novalidate>
+        {{ csrf_input }}
+        <div class="mb-5">
+          <label for="id_password" class="block text-sm font-medium text-slate-700 mb-1.5">
+            Mot de passe
+          </label>
+          <input
+            id="id_password"
+            type="password"
+            name="password"
+            autofocus
+            required
+            class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300
+                   text-slate-900 placeholder-slate-400 text-sm
+                   focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent
+                   {% if error %}border-red-400 bg-red-50{% endif %}"
+            placeholder="••••••••"
+          >
+        </div>
+
+        <button type="submit"
+                class="w-full py-2.5 px-4 bg-slate-900 hover:bg-slate-800
+                       text-white text-sm font-medium rounded-lg
+                       transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-slate-500">
+          Se connecter
+        </button>
+      </form>
+
+    </div>
+
+  </div>
+
+</body>
+</html>

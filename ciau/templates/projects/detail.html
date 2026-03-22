@@ -1,0 +1,488 @@
+{% extends 'base.html' %}
+{% block title %}{{ project.reference }} — CIAU{% endblock %}
+{% block page_id %}project-detail{% endblock %}
+
+{% block content %}
+<div class="px-6 py-6 max-w-screen-lg mx-auto space-y-6">
+
+  <!-- Header -->
+  <div class="flex flex-col sm:flex-row sm:items-start gap-4">
+    <div class="flex-1 min-w-0">
+      <a href="{{ url('dashboard') }}" class="text-xs text-slate-400 hover:text-slate-600 flex items-center gap-1 mb-2">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+        Tableau de bord
+      </a>
+      <div class="flex items-center gap-3 flex-wrap">
+        <h1 class="text-xl font-bold text-slate-900">{{ project.reference }}</h1>
+        {% if project.etat == 'en_cours' %}
+        <span class="badge-green">En cours</span>
+        {% elif project.etat == 'dormant' %}
+        <span class="badge-amber">Dormant</span>
+        {% else %}
+        <span class="badge-slate">Archivé</span>
+        {% endif %}
+        {% if project.potentiel %}
+        <span class="px-2 py-0.5 text-xs bg-violet-100 text-violet-700 rounded-full font-medium">Potentiel</span>
+        {% endif %}
+      </div>
+      <p class="mt-1 text-slate-600">{{ project.designation }}</p>
+    </div>
+    <div class="flex gap-2 shrink-0">
+      <a href="{{ url('project_edit', kwargs={'pk': project.pk}) }}"
+         class="px-3 py-1.5 text-sm border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition-colors">
+        Modifier
+      </a>
+      {% if project.etat != 'archive' %}
+      <form method="post" action="{{ url('project_archive', kwargs={'pk': project.pk}) }}"
+            onsubmit="return confirm('Archiver ce projet ?')">
+        {{ csrf_input }}
+        <button type="submit"
+                class="px-3 py-1.5 text-sm border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition-colors">
+          Archiver
+        </button>
+      </form>
+      {% endif %}
+      <form method="post" action="{{ url('project_delete', kwargs={'pk': project.pk}) }}"
+            onsubmit="return confirm('Supprimer définitivement ce projet ?')">
+        {{ csrf_input }}
+        <button type="submit"
+                class="px-3 py-1.5 text-sm border border-red-200 text-red-600 rounded-lg hover:bg-red-50 transition-colors">
+          Supprimer
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Identity block -->
+  <div class="bg-white rounded-xl border border-slate-200 p-5">
+    <h2 class="text-sm font-semibold text-slate-900 mb-4">Identité du projet</h2>
+    <dl class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-3 text-sm">
+      <div>
+        <dt class="text-slate-500">Maître d'ouvrage</dt>
+        <dd class="font-medium text-slate-900 mt-0.5">{{ project.maitre_ouvrage | default('—') }}</dd>
+      </div>
+      <div>
+        <dt class="text-slate-500">Responsable études</dt>
+        <dd class="font-medium text-slate-900 mt-0.5">{{ project.responsable_etudes | default('—') }}</dd>
+      </div>
+      <div>
+        <dt class="text-slate-500">Consultant extérieur</dt>
+        <dd class="font-medium text-slate-900 mt-0.5">{{ project.consultant_ext | default('—') }}</dd>
+      </div>
+      <div>
+        <dt class="text-slate-500">Contrat MOE</dt>
+        <dd class="font-medium text-slate-900 mt-0.5">{{ project.get_contrat_moe_display() | default('—') }}</dd>
+      </div>
+      <div>
+        <dt class="text-slate-500">Phase actuelle</dt>
+        <dd class="font-medium text-slate-900 mt-0.5">{{ project.phase_actuelle | default('—') }}</dd>
+      </div>
+      <div>
+        <dt class="text-slate-500">Créé le</dt>
+        <dd class="font-medium text-slate-900 mt-0.5">{{ project.created_at.strftime('%d/%m/%Y') }}</dd>
+      </div>
+    </dl>
+    {% if project.description %}
+    <div class="mt-4 pt-4 border-t border-slate-100">
+      <dt class="text-xs font-medium text-slate-500 uppercase tracking-wide mb-1">Description</dt>
+      <dd class="text-sm text-slate-700 whitespace-pre-line">{{ project.description }}</dd>
+    </div>
+    {% endif %}
+  </div>
+
+  <!-- Deliverables block -->
+  <div class="bg-white rounded-xl border border-slate-200 p-5">
+    <div class="flex items-center justify-between mb-4">
+      <div>
+        <h2 class="text-sm font-semibold text-slate-900">Livrables / Phases d'études</h2>
+        {% set total_d = deliverables | length %}
+        {% set valides = deliverables | selectattr('etat', 'equalto', 'valide') | list | length %}
+        <p class="text-xs text-slate-500 mt-0.5">{{ valides }}/{{ total_d }} phases validées</p>
+      </div>
+    </div>
+
+    <!-- Progress bar -->
+    {% set total_d = deliverables | length %}
+    {% set valides = deliverables | selectattr('etat', 'equalto', 'valide') | list | length %}
+    {% set pct = ((valides / total_d) * 100) | round | int if total_d > 0 else 0 %}
+    <div class="w-full bg-slate-100 rounded-full h-2 mb-5">
+      <div class="bg-green-500 h-2 rounded-full transition-all duration-300" style="width: {{ pct }}%"></div>
+    </div>
+
+    <!-- Deliverable list -->
+    {% if deliverables %}
+    <div class="space-y-2 mb-5">
+      {% for d in deliverables %}
+      <div class="flex items-start gap-3 p-3 rounded-lg border border-slate-100 hover:border-slate-200 transition-colors">
+
+        <!-- Phase badge -->
+        <span class="mt-0.5 shrink-0 w-16 text-center px-1.5 py-0.5 text-xs font-mono font-medium rounded
+                     {% if d.etat == 'valide' %}bg-green-100 text-green-700
+                     {% elif d.etat == 'livre' %}bg-blue-100 text-blue-700
+                     {% elif d.etat == 'en_cours' %}bg-amber-100 text-amber-700
+                     {% else %}bg-slate-100 text-slate-500{% endif %}">
+          {{ d.phase }}
+        </span>
+
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-sm font-medium text-slate-900">{{ d.get_phase_display() }}</span>
+            {% if d.is_overdue %}
+            <span class="text-xs text-red-600 font-medium">En retard</span>
+            {% elif d.is_urgent %}
+            <span class="text-xs text-amber-600 font-medium">Urgent</span>
+            {% endif %}
+          </div>
+          {% if d.commentaire %}
+          <p class="text-xs text-slate-500 mt-0.5 line-clamp-2">{{ d.commentaire }}</p>
+          {% endif %}
+          {% if d.deadline %}
+          <p class="text-xs text-slate-400 mt-0.5">Échéance : {{ d.deadline.strftime('%d/%m/%Y') }}</p>
+          {% endif %}
+          {% if d.file %}
+          <a href="{{ d.file.url }}" target="_blank"
+             class="inline-flex items-center gap-1 mt-1 text-xs text-blue-600 hover:underline">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"/>
+            </svg>
+            Fichier attaché
+          </a>
+          {% endif %}
+        </div>
+
+        <!-- Edit / state form -->
+        <details class="shrink-0 relative">
+          <summary class="cursor-pointer p-1.5 rounded hover:bg-slate-100 text-slate-400 hover:text-slate-600 list-none">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/>
+            </svg>
+          </summary>
+          <div class="absolute right-0 mt-1 w-72 bg-white border border-slate-200 rounded-xl shadow-lg z-10 p-4">
+            <p class="text-xs font-semibold text-slate-700 mb-3">Modifier la phase {{ d.phase }}</p>
+            <form method="post" action="{{ url('deliverable_edit', kwargs={'pk': project.pk, 'did': d.pk}) }}"
+                  class="space-y-2">
+              {{ csrf_input }}
+              <select name="etat" class="form-input w-full text-xs">
+                {% for val, label in d._meta.get_field('etat').choices %}
+                <option value="{{ val }}" {% if d.etat == val %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+              </select>
+              <input type="date" name="deadline" value="{{ d.deadline.isoformat() if d.deadline else '' }}"
+                     class="form-input w-full text-xs">
+              <textarea name="commentaire" rows="2" class="form-input w-full text-xs"
+                        placeholder="Commentaire…">{{ d.commentaire }}</textarea>
+              <button type="submit" class="w-full py-1.5 bg-slate-900 text-white text-xs rounded-lg hover:bg-slate-800">
+                Enregistrer
+              </button>
+            </form>
+            <!-- Upload -->
+            <form method="post" action="{{ url('deliverable_upload', kwargs={'pk': project.pk, 'did': d.pk}) }}"
+                  enctype="multipart/form-data" class="mt-3 pt-3 border-t border-slate-100">
+              {{ csrf_input }}
+              <label class="block text-xs text-slate-500 mb-1">Attacher un fichier</label>
+              <input type="file" name="file" class="text-xs w-full">
+              <button type="submit" class="mt-2 w-full py-1.5 border border-slate-300 text-slate-700 text-xs rounded-lg hover:bg-slate-50">
+                Téléverser
+              </button>
+            </form>
+            <!-- Delete -->
+            <form method="post" action="{{ url('deliverable_delete', kwargs={'pk': project.pk, 'did': d.pk}) }}"
+                  class="mt-2" onsubmit="return confirm('Supprimer cette phase ?')">
+              {{ csrf_input }}
+              <button type="submit" class="w-full py-1.5 border border-red-200 text-red-600 text-xs rounded-lg hover:bg-red-50">
+                Supprimer
+              </button>
+            </form>
+          </div>
+        </details>
+
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p class="text-sm text-slate-400 italic mb-4">Aucune phase définie.</p>
+    {% endif %}
+
+    <!-- Add deliverable -->
+    <details class="mt-2">
+      <summary class="cursor-pointer text-sm font-medium text-slate-700 hover:text-slate-900 flex items-center gap-1 list-none">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+        </svg>
+        Ajouter une phase
+      </summary>
+      <div class="mt-3 p-4 bg-slate-50 rounded-lg border border-slate-200">
+        <form method="post" action="{{ url('deliverable_add', kwargs={'pk': project.pk}) }}" class="space-y-2">
+          {{ csrf_input }}
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block text-xs text-slate-600 mb-1">Phase</label>
+              <select name="phase" class="form-input w-full text-sm">
+                {% for val, label in deliverable_form.fields.phase.choices %}
+                <option value="{{ val }}">{{ val }} — {{ label }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs text-slate-600 mb-1">État</label>
+              <select name="etat" class="form-input w-full text-sm">
+                {% for val, label in deliverable_form.fields.etat.choices %}
+                <option value="{{ val }}">{{ label }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs text-slate-600 mb-1">Échéance</label>
+            <input type="date" name="deadline" class="form-input w-full text-sm">
+          </div>
+          <div>
+            <label class="block text-xs text-slate-600 mb-1">Commentaire</label>
+            <textarea name="commentaire" rows="2" class="form-input w-full text-sm" placeholder="Observations…"></textarea>
+          </div>
+          <button type="submit" class="px-4 py-2 bg-slate-900 text-white text-sm rounded-lg hover:bg-slate-800">
+            Ajouter
+          </button>
+        </form>
+      </div>
+    </details>
+  </div>
+
+  <!-- Accounting block -->
+  <div class="bg-white rounded-xl border border-slate-200 p-5">
+    <h2 class="text-sm font-semibold text-slate-900 mb-4">Comptabilité</h2>
+
+    <!-- Honoraires & Solde summary -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5">
+      <div class="p-4 bg-slate-50 rounded-lg">
+        <p class="text-xs text-slate-500">Honoraires totaux</p>
+        <p class="mt-0.5 text-lg font-bold text-slate-900">
+          {{ project.honoraires | fcfa if project.honoraires else '—' }}
+        </p>
+      </div>
+      <div class="p-4 bg-slate-50 rounded-lg">
+        <p class="text-xs text-slate-500">Total encaissé</p>
+        <p class="mt-0.5 text-lg font-bold text-green-600">{{ project.total_encaisse | fcfa }}</p>
+      </div>
+      <div class="p-4 rounded-lg {% if project.solde and project.solde > 0 %}bg-amber-50{% elif project.solde and project.solde <= 0 %}bg-green-50{% else %}bg-slate-50{% endif %}">
+        <p class="text-xs text-slate-500">Solde restant</p>
+        {% if project.honoraires %}
+          {% set solde = project.solde %}
+          <p class="mt-0.5 text-lg font-bold {% if solde > 0 %}text-amber-600{% else %}text-green-600{% endif %}">
+            {{ solde | fcfa }}
+          </p>
+        {% else %}
+          <p class="mt-0.5 text-lg font-bold text-slate-400">—</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Payments table -->
+    {% if payments %}
+    <div class="overflow-x-auto mb-4">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="bg-slate-50 border-b border-slate-200">
+            <th class="px-3 py-2 text-left text-xs font-semibold text-slate-500">N°</th>
+            <th class="px-3 py-2 text-left text-xs font-semibold text-slate-500">Déclenchement</th>
+            <th class="px-3 py-2 text-right text-xs font-semibold text-slate-500">Montant</th>
+            <th class="px-3 py-2 text-center text-xs font-semibold text-slate-500">Statut</th>
+            <th class="px-3 py-2 text-left text-xs font-semibold text-slate-500">Encaissement</th>
+            <th class="px-3 py-2"></th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100">
+          {% for p in payments %}
+          <tr>
+            <td class="px-3 py-2.5 font-medium text-slate-900">{{ p.numero }}</td>
+            <td class="px-3 py-2.5 text-slate-600 max-w-xs">
+              <span class="line-clamp-2">{{ p.declenchement | default('—') }}</span>
+            </td>
+            <td class="px-3 py-2.5 text-right font-medium text-slate-900 whitespace-nowrap">{{ p.montant | fcfa }}</td>
+            <td class="px-3 py-2.5 text-center">
+              {% if p.statut == 'recu' %}
+              <span class="badge-green text-xs">Reçu</span>
+              {% elif p.statut == 'en_retard' %}
+              <span class="badge-red text-xs">En retard</span>
+              {% else %}
+              <span class="badge-slate text-xs">En attente</span>
+              {% endif %}
+            </td>
+            <td class="px-3 py-2.5 text-slate-600 text-xs">
+              {{ p.date_encaissement.strftime('%d/%m/%Y') if p.date_encaissement else '—' }}
+            </td>
+            <td class="px-3 py-2.5">
+              <div class="flex items-center gap-2 justify-end">
+                {% if not p.date_encaissement %}
+                <!-- Encaisser form -->
+                <form method="post" action="{{ url('payment_collect', kwargs={'pk': project.pk, 'pid': p.pk}) }}"
+                      class="flex items-center gap-1">
+                  {{ csrf_input }}
+                  <input type="date" name="date_encaissement"
+                         class="form-input text-xs py-1 px-2 w-36"
+                         required>
+                  <button type="submit"
+                          class="px-2 py-1 text-xs bg-green-600 text-white rounded hover:bg-green-700 whitespace-nowrap">
+                    Encaisser
+                  </button>
+                </form>
+                {% endif %}
+                <form method="post" action="{{ url('payment_delete', kwargs={'pk': project.pk, 'pid': p.pk}) }}"
+                      onsubmit="return confirm('Supprimer cet acompte ?')">
+                  {{ csrf_input }}
+                  <button type="submit" class="text-xs text-red-500 hover:text-red-700">Suppr.</button>
+                </form>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <p class="text-sm text-slate-400 italic mb-4">Aucun acompte défini.</p>
+    {% endif %}
+
+    <!-- Add payment -->
+    <details>
+      <summary class="cursor-pointer text-sm font-medium text-slate-700 hover:text-slate-900 flex items-center gap-1 list-none">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+        </svg>
+        Ajouter un acompte
+      </summary>
+      <div class="mt-3 p-4 bg-slate-50 rounded-lg border border-slate-200">
+        <form method="post" action="{{ url('payment_add', kwargs={'pk': project.pk}) }}" class="space-y-2">
+          {{ csrf_input }}
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block text-xs text-slate-600 mb-1">N° d'ordre</label>
+              <input type="number" name="numero" min="1" class="form-input w-full text-sm"
+                     value="{{ (payments | length) + 1 }}">
+            </div>
+            <div>
+              <label class="block text-xs text-slate-600 mb-1">Montant (FCFA)</label>
+              <input type="number" name="montant" min="0" step="1" class="form-input w-full text-sm">
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs text-slate-600 mb-1">Événement déclencheur</label>
+            <textarea name="declenchement" rows="2" class="form-input w-full text-sm"
+                      placeholder="ex: À la remise de l'Avant-Projet"></textarea>
+          </div>
+          <div>
+            <label class="block text-xs text-slate-600 mb-1">Date d'échéance</label>
+            <input type="date" name="date_echeance" class="form-input w-full text-sm">
+          </div>
+          <button type="submit" class="px-4 py-2 bg-slate-900 text-white text-sm rounded-lg hover:bg-slate-800">
+            Ajouter
+          </button>
+        </form>
+      </div>
+    </details>
+  </div>
+
+  <!-- References block -->
+  <div class="bg-white rounded-xl border border-slate-200 p-5">
+    <h2 class="text-sm font-semibold text-slate-900 mb-4">Références & Documents</h2>
+
+    {% if references %}
+    <ul class="space-y-2 mb-4">
+      {% for ref in references %}
+      <li class="flex items-center gap-3 p-2.5 rounded-lg border border-slate-100">
+        <!-- Icon by type -->
+        {% if ref.type == 'lien' %}
+        <svg class="w-4 h-4 text-blue-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
+        </svg>
+        {% elif ref.type == 'contact' %}
+        <svg class="w-4 h-4 text-green-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+        </svg>
+        {% else %}
+        <svg class="w-4 h-4 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+        </svg>
+        {% endif %}
+
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-medium text-slate-900">{{ ref.libelle }}</p>
+          {% if ref.valeur %}
+          <p class="text-xs text-slate-500 truncate">{{ ref.valeur }}</p>
+          {% endif %}
+          {% if ref.file %}
+          <a href="{{ ref.file.url }}" target="_blank" class="text-xs text-blue-600 hover:underline">
+            Télécharger
+          </a>
+          {% endif %}
+        </div>
+
+        <span class="text-xs text-slate-400">{{ ref.get_type_display() }}</span>
+
+        <form method="post" action="{{ url('reference_delete', kwargs={'pk': project.pk, 'rid': ref.pk}) }}"
+              onsubmit="return confirm('Supprimer cette référence ?')">
+          {{ csrf_input }}
+          <button type="submit" class="text-slate-300 hover:text-red-500 transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
+        </form>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p class="text-sm text-slate-400 italic mb-4">Aucune référence.</p>
+    {% endif %}
+
+    <!-- Add reference -->
+    <details>
+      <summary class="cursor-pointer text-sm font-medium text-slate-700 hover:text-slate-900 flex items-center gap-1 list-none">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+        </svg>
+        Ajouter une référence
+      </summary>
+      <div class="mt-3 p-4 bg-slate-50 rounded-lg border border-slate-200">
+        <form method="post" action="{{ url('reference_add', kwargs={'pk': project.pk}) }}"
+              enctype="multipart/form-data" class="space-y-2">
+          {{ csrf_input }}
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block text-xs text-slate-600 mb-1">Type</label>
+              <select name="type" class="form-input w-full text-sm">
+                {% for val, label in reference_form.fields.type.choices %}
+                <option value="{{ val }}">{{ label }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs text-slate-600 mb-1">Libellé</label>
+              <input type="text" name="libelle" class="form-input w-full text-sm" required>
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs text-slate-600 mb-1">Valeur (URL, email, numéro…)</label>
+            <input type="text" name="valeur" class="form-input w-full text-sm">
+          </div>
+          <div>
+            <label class="block text-xs text-slate-600 mb-1">Fichier (optionnel)</label>
+            <input type="file" name="file" class="text-xs">
+          </div>
+          <button type="submit" class="px-4 py-2 bg-slate-900 text-white text-sm rounded-lg hover:bg-slate-800">
+            Ajouter
+          </button>
+        </form>
+      </div>
+    </details>
+  </div>
+
+</div>
+{% endblock %}

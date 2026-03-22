@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block title %}Contrats — CIAU{% endblock %}
+{% block page_id %}contracts{% endblock %}
+
+{% block content %}
+<div class="px-6 py-6 max-w-screen-xl mx-auto">
+
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+    <div>
+      <h1 class="text-xl font-bold text-slate-900">Registre des contrats</h1>
+      <p class="text-sm text-slate-500 mt-0.5">Tous les projets avec un contrat MOE renseigné</p>
+    </div>
+
+    <!-- Filter -->
+    <form method="get" class="flex gap-2">
+      <select name="etat" onchange="this.form.submit()"
+              class="px-3 py-2 text-sm border border-slate-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-slate-900">
+        <option value="">Tous les états</option>
+        {% for val, label in etat_choices %}
+        {% if val != 'archive' %}
+        <option value="{{ val }}" {% if current_etat == val %}selected{% endif %}>{{ label }}</option>
+        {% endif %}
+        {% endfor %}
+      </select>
+      {% if current_etat %}
+      <a href="{{ url('contracts_list') }}"
+         class="px-3 py-2 text-sm border border-slate-300 rounded-lg text-slate-600 hover:bg-slate-50">
+        Réinitialiser
+      </a>
+      {% endif %}
+    </form>
+  </div>
+
+  <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+    {% if contracts %}
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="bg-slate-50 border-b border-slate-200">
+            <th class="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wide">Référence</th>
+            <th class="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wide">Désignation</th>
+            <th class="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wide hidden md:table-cell">Maître d'ouvrage</th>
+            <th class="px-4 py-3 text-center text-xs font-semibold text-slate-500 uppercase tracking-wide">État projet</th>
+            <th class="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wide">Statut contrat</th>
+            <th class="px-4 py-3"></th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100">
+          {% for c in contracts %}
+          <tr class="hover:bg-slate-50 transition-colors">
+            <td class="px-4 py-3 font-mono text-xs text-slate-600 whitespace-nowrap">{{ c.reference }}</td>
+            <td class="px-4 py-3 text-slate-900 max-w-xs">
+              <span class="line-clamp-2">{{ c.designation }}</span>
+            </td>
+            <td class="px-4 py-3 text-slate-600 hidden md:table-cell">{{ c.maitre_ouvrage | default('—') }}</td>
+            <td class="px-4 py-3 text-center">
+              {% if c.etat == 'en_cours' %}
+              <span class="badge-green">En cours</span>
+              {% elif c.etat == 'dormant' %}
+              <span class="badge-amber">Dormant</span>
+              {% else %}
+              <span class="badge-slate">Archivé</span>
+              {% endif %}
+            </td>
+            <td class="px-4 py-3 text-slate-600 text-xs">
+              {{ c.get_contrat_moe_display() }}
+            </td>
+            <td class="px-4 py-3 text-right">
+              <a href="{{ url('project_detail', kwargs={'pk': c.pk}) }}"
+                 class="text-xs font-medium text-slate-900 hover:text-slate-600 underline-offset-2 hover:underline">
+                Ouvrir
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <div class="py-16 text-center">
+      <svg class="mx-auto w-12 h-12 text-slate-300 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+      </svg>
+      <p class="text-slate-500 text-sm">Aucun contrat trouvé.</p>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

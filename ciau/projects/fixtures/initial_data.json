@@ -1,0 +1,1493 @@
+[
+  {
+    "model": "projects.stakeholder",
+    "pk": 1,
+    "fields": {
+      "nom": "Eric KOUMADO",
+      "poste": "Responsable Administratif et Financier"
+    }
+  },
+  {
+    "model": "projects.stakeholder",
+    "pk": 2,
+    "fields": {
+      "nom": "Cédric GBAGBA",
+      "poste": "Responsable Technique Architecture"
+    }
+  },
+  {
+    "model": "projects.stakeholder",
+    "pk": 3,
+    "fields": {
+      "nom": "Augustin AKOUVI",
+      "poste": "Responsable Technique Œuvres Secondaires"
+    }
+  },
+  {
+    "model": "projects.stakeholder",
+    "pk": 4,
+    "fields": {
+      "nom": "Pierrette TCHINDI",
+      "poste": "Logistique & Divers"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 1,
+    "fields": {
+      "reference": "PRI/..-…/PR",
+      "designation": "Projet de construction d'un immeuble R+7 à Nyekonakpoe",
+      "maitre_ouvrage": "Victor EHE",
+      "description": "",
+      "responsable_etudes": "",
+      "consultant_ext": "",
+      "contrat_moe": "projet",
+      "etat": "en_cours",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.339419+00:00",
+      "updated_at": "2026-03-22T00:33:02.339419+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 2,
+    "fields": {
+      "reference": "PRI/..-.../PR",
+      "designation": "Projet de construction du centre commercial K2T",
+      "maitre_ouvrage": "KLASS TOSSOU Tinos",
+      "description": "",
+      "responsable_etudes": "",
+      "consultant_ext": "",
+      "contrat_moe": "projet",
+      "etat": "en_cours",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.339453+00:00",
+      "updated_at": "2026-03-22T00:33:02.339453+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 3,
+    "fields": {
+      "reference": "RES/..-.../PR",
+      "designation": "Projet de construction d'une villa duplex F4 à Amlamé",
+      "maitre_ouvrage": "Perso",
+      "description": "",
+      "responsable_etudes": "",
+      "consultant_ext": "",
+      "contrat_moe": "",
+      "etat": "en_cours",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.339465+00:00",
+      "updated_at": "2026-03-22T00:33:02.339465+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 4,
+    "fields": {
+      "reference": "RES/1118/PR",
+      "designation": "Projet de réabilitation de villas jumellées à Nyekonakpoe",
+      "maitre_ouvrage": "DOSSA",
+      "description": "",
+      "responsable_etudes": "",
+      "consultant_ext": "",
+      "contrat_moe": "signe",
+      "etat": "en_cours",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.339478+00:00",
+      "updated_at": "2026-03-22T00:33:02.339478+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 5,
+    "fields": {
+      "reference": "IND/..-.../IN",
+      "designation": "Projet de construction d'une crèche garderie",
+      "maitre_ouvrage": "BOAD",
+      "description": "",
+      "responsable_etudes": "",
+      "consultant_ext": "",
+      "contrat_moe": "projet",
+      "etat": "en_cours",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.339487+00:00",
+      "updated_at": "2026-03-22T00:33:02.339487+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 6,
+    "fields": {
+      "reference": "RES/..-.../PR",
+      "designation": "Projet de construction d'un immeuble résidentiel à Hedzranawe",
+      "maitre_ouvrage": "Mme Bella",
+      "description": "",
+      "responsable_etudes": "",
+      "consultant_ext": "",
+      "contrat_moe": "projet",
+      "etat": "en_cours",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.339496+00:00",
+      "updated_at": "2026-03-22T00:33:02.339496+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 7,
+    "fields": {
+      "reference": "IND/..-.../IN",
+      "designation": "Projet de construction de la gare Amou Oblo",
+      "maitre_ouvrage": "Mairie Amou Oblo",
+      "description": "",
+      "responsable_etudes": "",
+      "consultant_ext": "",
+      "contrat_moe": "projet",
+      "etat": "en_cours",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.339503+00:00",
+      "updated_at": "2026-03-22T00:33:02.339503+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 8,
+    "fields": {
+      "reference": "RES/..-.../IN",
+      "designation": "Projet de constrcution d'une résidence secondaire à Alogavi",
+      "maitre_ouvrage": "Ministre",
+      "description": "",
+      "responsable_etudes": "",
+      "consultant_ext": "",
+      "contrat_moe": "projet",
+      "etat": "en_cours",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.339520+00:00",
+      "updated_at": "2026-03-22T00:33:02.339520+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 9,
+    "fields": {
+      "reference": "Villa06/02-025/LT",
+      "designation": "Projet de construction d'une éco résidence à Agbodrafo",
+      "maitre_ouvrage": "M SODATONOU",
+      "description": "",
+      "responsable_etudes": "",
+      "consultant_ext": "",
+      "contrat_moe": "projet",
+      "etat": "en_cours",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.339531+00:00",
+      "updated_at": "2026-03-22T00:33:02.339531+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 10,
+    "fields": {
+      "reference": "US01/03-025/LT",
+      "designation": "Projet de construction usine Sofina",
+      "maitre_ouvrage": "SOFINA",
+      "description": "Projet de construction usine Sofina",
+      "responsable_etudes": "M. Cédric GBAGBA",
+      "consultant_ext": "",
+      "contrat_moe": "projet",
+      "etat": "en_cours",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.339539+00:00",
+      "updated_at": "2026-03-22T00:33:02.339539+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 11,
+    "fields": {
+      "reference": "IR7/05-2024/LT",
+      "designation": "Projet de construction d'une résidence de M. BAROUD",
+      "maitre_ouvrage": "M. BAROUD",
+      "description": "Projet de construction d'une résidence",
+      "responsable_etudes": "M. Cédric GBAGBA",
+      "consultant_ext": "",
+      "contrat_moe": "",
+      "etat": "en_cours",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.339547+00:00",
+      "updated_at": "2026-03-22T00:33:02.339547+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 12,
+    "fields": {
+      "reference": "IR8/06-024/LT",
+      "designation": "Projet de construction de la résidence Les merveilles",
+      "maitre_ouvrage": "AGBOMSON",
+      "description": "Projet de construction de la résidence Les merveilles",
+      "responsable_etudes": "M. Cédric GBAGBA",
+      "consultant_ext": "",
+      "contrat_moe": "a_verifier",
+      "etat": "en_cours",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.339555+00:00",
+      "updated_at": "2026-03-22T00:33:02.339555+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 13,
+    "fields": {
+      "reference": "Villa04/06-024/LT",
+      "designation": "Projet de construction de villas jumellées à Hedzranawe",
+      "maitre_ouvrage": "D'ALMEIDA",
+      "description": "Projet de construction de villas jumellées à Hedzranawe",
+      "responsable_etudes": "M. Cédric GBAGBA",
+      "consultant_ext": "",
+      "contrat_moe": "signe",
+      "etat": "en_cours",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.339564+00:00",
+      "updated_at": "2026-03-22T00:33:02.339564+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 14,
+    "fields": {
+      "reference": "Eg01/04-024/LT",
+      "designation": "Projet de construction d'une église presbytérienne",
+      "maitre_ouvrage": "Mme ANTHONY",
+      "description": "Projet de construction d'une église presbytérienne",
+      "responsable_etudes": "M. Cédric GBAGBA",
+      "consultant_ext": "",
+      "contrat_moe": "signe",
+      "etat": "en_cours",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.339574+00:00",
+      "updated_at": "2026-03-22T00:33:02.339574+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 15,
+    "fields": {
+      "reference": "IND/..-.../IN",
+      "designation": "Projet SIMANDOU 2040",
+      "maitre_ouvrage": "ORABANK",
+      "description": "",
+      "responsable_etudes": "",
+      "consultant_ext": "",
+      "contrat_moe": "",
+      "etat": "dormant",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.339587+00:00",
+      "updated_at": "2026-03-22T00:33:02.339587+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 16,
+    "fields": {
+      "reference": "REF-007",
+      "designation": "Projet de construction de vestiaires pour stade",
+      "maitre_ouvrage": "MAY",
+      "description": "",
+      "responsable_etudes": "",
+      "consultant_ext": "",
+      "contrat_moe": "",
+      "etat": "dormant",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.339595+00:00",
+      "updated_at": "2026-03-22T00:33:02.339595+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 17,
+    "fields": {
+      "reference": "IR11/11-024/LT",
+      "designation": "Projet Grunitzky",
+      "maitre_ouvrage": "Grunitzky",
+      "description": "Projet Grunitzky",
+      "responsable_etudes": "M. Thiombiano Franck",
+      "consultant_ext": "",
+      "contrat_moe": "",
+      "etat": "dormant",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.339606+00:00",
+      "updated_at": "2026-03-22T00:33:02.339606+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 18,
+    "fields": {
+      "reference": "PNHG 03/01-2025",
+      "designation": "Projet de construction d'un R+14 - Antik Building",
+      "maitre_ouvrage": "PNHG",
+      "description": "Projet de construction d'un R+14 - Antik Building",
+      "responsable_etudes": "",
+      "consultant_ext": "",
+      "contrat_moe": "",
+      "etat": "dormant",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.339614+00:00",
+      "updated_at": "2026-03-22T00:33:02.339614+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 19,
+    "fields": {
+      "reference": "IAF15/01-2023/LT",
+      "designation": "Tour Mono",
+      "maitre_ouvrage": "",
+      "description": "",
+      "responsable_etudes": "M. Thiombiano Franck",
+      "consultant_ext": "",
+      "contrat_moe": "",
+      "etat": "dormant",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.339622+00:00",
+      "updated_at": "2026-03-22T00:33:02.339622+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 20,
+    "fields": {
+      "reference": "#REF!",
+      "designation": "Projet de construction d'un immeuble résidentiel R+5",
+      "maitre_ouvrage": "TAY Benoit Biova",
+      "description": "",
+      "responsable_etudes": "",
+      "consultant_ext": "",
+      "contrat_moe": "",
+      "etat": "dormant",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.339629+00:00",
+      "updated_at": "2026-03-22T00:33:02.339629+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 21,
+    "fields": {
+      "reference": "REF-001",
+      "designation": "Site web - Vitrine du cabinet",
+      "maitre_ouvrage": "CIAU",
+      "description": "",
+      "responsable_etudes": "",
+      "consultant_ext": "",
+      "contrat_moe": "",
+      "etat": "en_cours",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.339642+00:00",
+      "updated_at": "2026-03-22T00:33:02.339642+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 22,
+    "fields": {
+      "reference": "Villa05/02-025/LT",
+      "designation": "Projet deconstruction d'une villa F5",
+      "maitre_ouvrage": "Mr Homawoo",
+      "description": "",
+      "responsable_etudes": "",
+      "consultant_ext": "",
+      "contrat_moe": "",
+      "etat": "archive",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.339899+00:00",
+      "updated_at": "2026-03-22T00:33:02.339899+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 23,
+    "fields": {
+      "reference": "IR9/11-024/LT",
+      "designation": "Projet de construction d'un immeuble R+3",
+      "maitre_ouvrage": "Mr Akoete",
+      "description": "",
+      "responsable_etudes": "",
+      "consultant_ext": "",
+      "contrat_moe": "",
+      "etat": "archive",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.339920+00:00",
+      "updated_at": "2026-03-22T00:33:02.339920+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 24,
+    "fields": {
+      "reference": "PNHG 02/12-2024",
+      "designation": "Résidence Bien - Etre",
+      "maitre_ouvrage": "PNHG",
+      "description": "",
+      "responsable_etudes": "",
+      "consultant_ext": "",
+      "contrat_moe": "",
+      "etat": "archive",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.339928+00:00",
+      "updated_at": "2026-03-22T00:33:02.339928+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 25,
+    "fields": {
+      "reference": "IR6/02-2023/LT",
+      "designation": "Projet d'aménagement d'une terrasse piscine",
+      "maitre_ouvrage": "Mme BARBEN",
+      "description": "IMMEUBLE RESIDENTIEL R+5 COCODY ABIDJAN",
+      "responsable_etudes": "M. Thiombiano Franck",
+      "consultant_ext": "",
+      "contrat_moe": "",
+      "etat": "archive",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": 52500000,
+      "created_at": "2026-03-22T00:33:02.339935+00:00",
+      "updated_at": "2026-03-22T00:33:02.339935+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 26,
+    "fields": {
+      "reference": "BOAD 10/2024/LT",
+      "designation": "BOAD - Bureaux DPA",
+      "maitre_ouvrage": "BOAD",
+      "description": "",
+      "responsable_etudes": "",
+      "consultant_ext": "",
+      "contrat_moe": "",
+      "etat": "archive",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.339951+00:00",
+      "updated_at": "2026-03-22T00:33:02.339951+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 27,
+    "fields": {
+      "reference": "BOAD 06/2024/LT",
+      "designation": "BOAD - Salle d'audience du VP",
+      "maitre_ouvrage": "BOAD",
+      "description": "",
+      "responsable_etudes": "",
+      "consultant_ext": "",
+      "contrat_moe": "",
+      "etat": "archive",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.339960+00:00",
+      "updated_at": "2026-03-22T00:33:02.339960+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 28,
+    "fields": {
+      "reference": "BOAD 07/2023/LT",
+      "designation": "BOAD - Villa Vice Président",
+      "maitre_ouvrage": "BOAD",
+      "description": "",
+      "responsable_etudes": "",
+      "consultant_ext": "",
+      "contrat_moe": "",
+      "etat": "archive",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.339967+00:00",
+      "updated_at": "2026-03-22T00:33:02.339967+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 29,
+    "fields": {
+      "reference": "BOAD 05/2023/LT",
+      "designation": "BOAD - centre de loisirs",
+      "maitre_ouvrage": "BOAD",
+      "description": "",
+      "responsable_etudes": "",
+      "consultant_ext": "",
+      "contrat_moe": "",
+      "etat": "archive",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.339974+00:00",
+      "updated_at": "2026-03-22T00:33:02.339974+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 30,
+    "fields": {
+      "reference": "BOAD 08/2024/LT",
+      "designation": "BOAD - Centre de documentation",
+      "maitre_ouvrage": "BOAD",
+      "description": "",
+      "responsable_etudes": "",
+      "consultant_ext": "",
+      "contrat_moe": "",
+      "etat": "archive",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.339981+00:00",
+      "updated_at": "2026-03-22T00:33:02.339981+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 31,
+    "fields": {
+      "reference": "BOAD 09/2024/LT",
+      "designation": "BOAD - Parkings",
+      "maitre_ouvrage": "BOAD",
+      "description": "",
+      "responsable_etudes": "",
+      "consultant_ext": "",
+      "contrat_moe": "",
+      "etat": "archive",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.339987+00:00",
+      "updated_at": "2026-03-22T00:33:02.339987+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 32,
+    "fields": {
+      "reference": "Villa01/11-2023/LT",
+      "designation": "Villa Mme ANTHONY",
+      "maitre_ouvrage": "Mme ANTHONY",
+      "description": "",
+      "responsable_etudes": "",
+      "consultant_ext": "",
+      "contrat_moe": "",
+      "etat": "archive",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.339993+00:00",
+      "updated_at": "2026-03-22T00:33:02.339993+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 33,
+    "fields": {
+      "reference": "PNHG 01/05-2023",
+      "designation": "KARA",
+      "maitre_ouvrage": "",
+      "description": "",
+      "responsable_etudes": "",
+      "consultant_ext": "",
+      "contrat_moe": "",
+      "etat": "archive",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.340000+00:00",
+      "updated_at": "2026-03-22T00:33:02.340000+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 34,
+    "fields": {
+      "reference": "NSIA 01/08-2022",
+      "designation": "NSIA Totsi",
+      "maitre_ouvrage": "",
+      "description": "",
+      "responsable_etudes": "",
+      "consultant_ext": "",
+      "contrat_moe": "",
+      "etat": "archive",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.340006+00:00",
+      "updated_at": "2026-03-22T00:33:02.340006+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 35,
+    "fields": {
+      "reference": "NSIA 02/08-2022",
+      "designation": "NSIA Dapaong",
+      "maitre_ouvrage": "",
+      "description": "",
+      "responsable_etudes": "",
+      "consultant_ext": "",
+      "contrat_moe": "",
+      "etat": "archive",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.340012+00:00",
+      "updated_at": "2026-03-22T00:33:02.340012+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 36,
+    "fields": {
+      "reference": "CEFOP01/05-024",
+      "designation": "Projet CEFOP - KLEME",
+      "maitre_ouvrage": "",
+      "description": "",
+      "responsable_etudes": "",
+      "consultant_ext": "",
+      "contrat_moe": "",
+      "etat": "archive",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.340018+00:00",
+      "updated_at": "2026-03-22T00:33:02.340018+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 37,
+    "fields": {
+      "reference": "Villa03/10-023/LT",
+      "designation": "Projet de deux villas sis à Aflao de Mr ATAHI",
+      "maitre_ouvrage": "M. ATAHI",
+      "description": "",
+      "responsable_etudes": "",
+      "consultant_ext": "",
+      "contrat_moe": "",
+      "etat": "archive",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.340024+00:00",
+      "updated_at": "2026-03-22T00:33:02.340024+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 38,
+    "fields": {
+      "reference": "Villa 01/04-2024/LT",
+      "designation": "Cédric ASSIGNON",
+      "maitre_ouvrage": "",
+      "description": "",
+      "responsable_etudes": "",
+      "consultant_ext": "",
+      "contrat_moe": "",
+      "etat": "archive",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.340030+00:00",
+      "updated_at": "2026-03-22T00:33:02.340030+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 39,
+    "fields": {
+      "reference": "Villa03/10-023/LT",
+      "designation": "ATAHI IRIS et KIM",
+      "maitre_ouvrage": "",
+      "description": "",
+      "responsable_etudes": "",
+      "consultant_ext": "",
+      "contrat_moe": "",
+      "etat": "archive",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.340043+00:00",
+      "updated_at": "2026-03-22T00:33:02.340043+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 40,
+    "fields": {
+      "reference": "BUR/0320/IN",
+      "designation": "BOAD",
+      "maitre_ouvrage": "",
+      "description": "",
+      "responsable_etudes": "",
+      "consultant_ext": "",
+      "contrat_moe": "",
+      "etat": "archive",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.340066+00:00",
+      "updated_at": "2026-03-22T00:33:02.340066+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 41,
+    "fields": {
+      "reference": "RES/0615/PR",
+      "designation": "DR JAMES",
+      "maitre_ouvrage": "",
+      "description": "",
+      "responsable_etudes": "",
+      "consultant_ext": "",
+      "contrat_moe": "",
+      "etat": "archive",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.340073+00:00",
+      "updated_at": "2026-03-22T00:33:02.340073+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 42,
+    "fields": {
+      "reference": "RES/1014/PR",
+      "designation": "MME LAURE",
+      "maitre_ouvrage": "",
+      "description": "",
+      "responsable_etudes": "",
+      "consultant_ext": "",
+      "contrat_moe": "",
+      "etat": "archive",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.340079+00:00",
+      "updated_at": "2026-03-22T00:33:02.340079+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 43,
+    "fields": {
+      "reference": "RES/0617/PR",
+      "designation": "M. ATAYI Eric",
+      "maitre_ouvrage": "",
+      "description": "",
+      "responsable_etudes": "",
+      "consultant_ext": "",
+      "contrat_moe": "",
+      "etat": "archive",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.340086+00:00",
+      "updated_at": "2026-03-22T00:33:02.340086+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 44,
+    "fields": {
+      "reference": "RES/1114/PR",
+      "designation": "M. GUERALD",
+      "maitre_ouvrage": "",
+      "description": "",
+      "responsable_etudes": "",
+      "consultant_ext": "",
+      "contrat_moe": "",
+      "etat": "archive",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.340095+00:00",
+      "updated_at": "2026-03-22T00:33:02.340095+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 45,
+    "fields": {
+      "reference": "RES/0617/PR",
+      "designation": "M. MEY (Villas ACCRA)",
+      "maitre_ouvrage": "",
+      "description": "",
+      "responsable_etudes": "",
+      "consultant_ext": "",
+      "contrat_moe": "",
+      "etat": "archive",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.340101+00:00",
+      "updated_at": "2026-03-22T00:33:02.340101+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 46,
+    "fields": {
+      "reference": "HOP/0816/PR",
+      "designation": "CLINIQUE TAAMBA",
+      "maitre_ouvrage": "",
+      "description": "",
+      "responsable_etudes": "",
+      "consultant_ext": "",
+      "contrat_moe": "",
+      "etat": "archive",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.340108+00:00",
+      "updated_at": "2026-03-22T00:33:02.340108+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 47,
+    "fields": {
+      "reference": "RES/0516/PR",
+      "designation": "MME VIAZ(Résidence TOKOIN HOPITAL)",
+      "maitre_ouvrage": "",
+      "description": "",
+      "responsable_etudes": "",
+      "consultant_ext": "",
+      "contrat_moe": "",
+      "etat": "archive",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.340114+00:00",
+      "updated_at": "2026-03-22T00:33:02.340114+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 48,
+    "fields": {
+      "reference": "PRI/0516/PR",
+      "designation": "MME VIAZ(IMMEUBLE)",
+      "maitre_ouvrage": "",
+      "description": "",
+      "responsable_etudes": "",
+      "consultant_ext": "",
+      "contrat_moe": "",
+      "etat": "archive",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.340120+00:00",
+      "updated_at": "2026-03-22T00:33:02.340120+00:00"
+    }
+  },
+  {
+    "model": "projects.project",
+    "pk": 49,
+    "fields": {
+      "reference": "BUR/0620/PR",
+      "designation": "Siège Immeuble EGC",
+      "maitre_ouvrage": "",
+      "description": "",
+      "responsable_etudes": "",
+      "consultant_ext": "",
+      "contrat_moe": "",
+      "etat": "archive",
+      "phase_actuelle": "",
+      "potentiel": false,
+      "honoraires": null,
+      "created_at": "2026-03-22T00:33:02.340127+00:00",
+      "updated_at": "2026-03-22T00:33:02.340127+00:00"
+    }
+  },
+  {
+    "model": "projects.deliverable",
+    "pk": 1,
+    "fields": {
+      "project": 25,
+      "phase": "EP",
+      "etat": "valide",
+      "commentaire": "",
+      "deadline": null,
+      "file": ""
+    }
+  },
+  {
+    "model": "projects.deliverable",
+    "pk": 2,
+    "fields": {
+      "project": 25,
+      "phase": "APS",
+      "etat": "valide",
+      "commentaire": "",
+      "deadline": null,
+      "file": ""
+    }
+  },
+  {
+    "model": "projects.deliverable",
+    "pk": 3,
+    "fields": {
+      "project": 25,
+      "phase": "APD",
+      "etat": "valide",
+      "commentaire": "",
+      "deadline": null,
+      "file": ""
+    }
+  },
+  {
+    "model": "projects.deliverable",
+    "pk": 4,
+    "fields": {
+      "project": 25,
+      "phase": "IPC",
+      "etat": "valide",
+      "commentaire": "",
+      "deadline": null,
+      "file": ""
+    }
+  },
+  {
+    "model": "projects.deliverable",
+    "pk": 5,
+    "fields": {
+      "project": 25,
+      "phase": "PCG",
+      "etat": "a_faire",
+      "commentaire": "",
+      "deadline": null,
+      "file": ""
+    }
+  },
+  {
+    "model": "projects.deliverable",
+    "pk": 6,
+    "fields": {
+      "project": 25,
+      "phase": "DCE",
+      "etat": "a_faire",
+      "commentaire": "",
+      "deadline": null,
+      "file": ""
+    }
+  },
+  {
+    "model": "projects.deliverable",
+    "pk": 7,
+    "fields": {
+      "project": 25,
+      "phase": "MDT",
+      "etat": "a_faire",
+      "commentaire": "",
+      "deadline": null,
+      "file": ""
+    }
+  },
+  {
+    "model": "projects.deliverable",
+    "pk": 8,
+    "fields": {
+      "project": 25,
+      "phase": "TRAVAUX",
+      "etat": "a_faire",
+      "commentaire": "",
+      "deadline": null,
+      "file": ""
+    }
+  },
+  {
+    "model": "projects.deliverable",
+    "pk": 9,
+    "fields": {
+      "project": 19,
+      "phase": "APD",
+      "etat": "a_faire",
+      "commentaire": "",
+      "deadline": null,
+      "file": ""
+    }
+  },
+  {
+    "model": "projects.deliverable",
+    "pk": 10,
+    "fields": {
+      "project": 19,
+      "phase": "DCE",
+      "etat": "a_faire",
+      "commentaire": "",
+      "deadline": null,
+      "file": ""
+    }
+  },
+  {
+    "model": "projects.deliverable",
+    "pk": 11,
+    "fields": {
+      "project": 19,
+      "phase": "TRAVAUX",
+      "etat": "a_faire",
+      "commentaire": "",
+      "deadline": null,
+      "file": ""
+    }
+  },
+  {
+    "model": "projects.deliverable",
+    "pk": 12,
+    "fields": {
+      "project": 18,
+      "phase": "APD",
+      "etat": "a_faire",
+      "commentaire": "",
+      "deadline": null,
+      "file": ""
+    }
+  },
+  {
+    "model": "projects.deliverable",
+    "pk": 13,
+    "fields": {
+      "project": 18,
+      "phase": "DCE",
+      "etat": "a_faire",
+      "commentaire": "",
+      "deadline": null,
+      "file": ""
+    }
+  },
+  {
+    "model": "projects.deliverable",
+    "pk": 14,
+    "fields": {
+      "project": 18,
+      "phase": "TRAVAUX",
+      "etat": "a_faire",
+      "commentaire": "",
+      "deadline": null,
+      "file": ""
+    }
+  },
+  {
+    "model": "projects.deliverable",
+    "pk": 15,
+    "fields": {
+      "project": 17,
+      "phase": "APD",
+      "etat": "a_faire",
+      "commentaire": "",
+      "deadline": null,
+      "file": ""
+    }
+  },
+  {
+    "model": "projects.deliverable",
+    "pk": 16,
+    "fields": {
+      "project": 17,
+      "phase": "DCE",
+      "etat": "a_faire",
+      "commentaire": "",
+      "deadline": null,
+      "file": ""
+    }
+  },
+  {
+    "model": "projects.deliverable",
+    "pk": 17,
+    "fields": {
+      "project": 17,
+      "phase": "TRAVAUX",
+      "etat": "a_faire",
+      "commentaire": "",
+      "deadline": null,
+      "file": ""
+    }
+  },
+  {
+    "model": "projects.deliverable",
+    "pk": 18,
+    "fields": {
+      "project": 17,
+      "phase": "APD",
+      "etat": "a_faire",
+      "commentaire": "",
+      "deadline": null,
+      "file": ""
+    }
+  },
+  {
+    "model": "projects.deliverable",
+    "pk": 19,
+    "fields": {
+      "project": 17,
+      "phase": "DCE",
+      "etat": "a_faire",
+      "commentaire": "",
+      "deadline": null,
+      "file": ""
+    }
+  },
+  {
+    "model": "projects.deliverable",
+    "pk": 20,
+    "fields": {
+      "project": 17,
+      "phase": "TRAVAUX",
+      "etat": "a_faire",
+      "commentaire": "",
+      "deadline": null,
+      "file": ""
+    }
+  },
+  {
+    "model": "projects.deliverable",
+    "pk": 21,
+    "fields": {
+      "project": 17,
+      "phase": "APD",
+      "etat": "a_faire",
+      "commentaire": "",
+      "deadline": null,
+      "file": ""
+    }
+  },
+  {
+    "model": "projects.deliverable",
+    "pk": 22,
+    "fields": {
+      "project": 17,
+      "phase": "DCE",
+      "etat": "a_faire",
+      "commentaire": "",
+      "deadline": null,
+      "file": ""
+    }
+  },
+  {
+    "model": "projects.deliverable",
+    "pk": 23,
+    "fields": {
+      "project": 17,
+      "phase": "TRAVAUX",
+      "etat": "a_faire",
+      "commentaire": "",
+      "deadline": null,
+      "file": ""
+    }
+  },
+  {
+    "model": "projects.deliverable",
+    "pk": 24,
+    "fields": {
+      "project": 17,
+      "phase": "APD",
+      "etat": "a_faire",
+      "commentaire": "",
+      "deadline": null,
+      "file": ""
+    }
+  },
+  {
+    "model": "projects.deliverable",
+    "pk": 25,
+    "fields": {
+      "project": 17,
+      "phase": "DCE",
+      "etat": "a_faire",
+      "commentaire": "",
+      "deadline": null,
+      "file": ""
+    }
+  },
+  {
+    "model": "projects.deliverable",
+    "pk": 26,
+    "fields": {
+      "project": 17,
+      "phase": "TRAVAUX",
+      "etat": "a_faire",
+      "commentaire": "",
+      "deadline": null,
+      "file": ""
+    }
+  },
+  {
+    "model": "projects.deliverable",
+    "pk": 27,
+    "fields": {
+      "project": 14,
+      "phase": "APD",
+      "etat": "a_faire",
+      "commentaire": "",
+      "deadline": null,
+      "file": ""
+    }
+  },
+  {
+    "model": "projects.deliverable",
+    "pk": 28,
+    "fields": {
+      "project": 14,
+      "phase": "DCE",
+      "etat": "a_faire",
+      "commentaire": "",
+      "deadline": null,
+      "file": ""
+    }
+  },
+  {
+    "model": "projects.deliverable",
+    "pk": 29,
+    "fields": {
+      "project": 14,
+      "phase": "TRAVAUX",
+      "etat": "a_faire",
+      "commentaire": "",
+      "deadline": null,
+      "file": ""
+    }
+  },
+  {
+    "model": "projects.deliverable",
+    "pk": 30,
+    "fields": {
+      "project": 13,
+      "phase": "APD",
+      "etat": "a_faire",
+      "commentaire": "",
+      "deadline": null,
+      "file": ""
+    }
+  },
+  {
+    "model": "projects.deliverable",
+    "pk": 31,
+    "fields": {
+      "project": 13,
+      "phase": "DCE",
+      "etat": "a_faire",
+      "commentaire": "",
+      "deadline": null,
+      "file": ""
+    }
+  },
+  {
+    "model": "projects.deliverable",
+    "pk": 32,
+    "fields": {
+      "project": 13,
+      "phase": "TRAVAUX",
+      "etat": "a_faire",
+      "commentaire": "",
+      "deadline": null,
+      "file": ""
+    }
+  },
+  {
+    "model": "projects.deliverable",
+    "pk": 33,
+    "fields": {
+      "project": 12,
+      "phase": "APD",
+      "etat": "a_faire",
+      "commentaire": "",
+      "deadline": null,
+      "file": ""
+    }
+  },
+  {
+    "model": "projects.deliverable",
+    "pk": 34,
+    "fields": {
+      "project": 12,
+      "phase": "DCE",
+      "etat": "a_faire",
+      "commentaire": "",
+      "deadline": null,
+      "file": ""
+    }
+  },
+  {
+    "model": "projects.deliverable",
+    "pk": 35,
+    "fields": {
+      "project": 12,
+      "phase": "TRAVAUX",
+      "etat": "a_faire",
+      "commentaire": "",
+      "deadline": null,
+      "file": ""
+    }
+  },
+  {
+    "model": "projects.deliverable",
+    "pk": 36,
+    "fields": {
+      "project": 11,
+      "phase": "APD",
+      "etat": "a_faire",
+      "commentaire": "",
+      "deadline": null,
+      "file": ""
+    }
+  },
+  {
+    "model": "projects.deliverable",
+    "pk": 37,
+    "fields": {
+      "project": 11,
+      "phase": "DCE",
+      "etat": "a_faire",
+      "commentaire": "",
+      "deadline": null,
+      "file": ""
+    }
+  },
+  {
+    "model": "projects.deliverable",
+    "pk": 38,
+    "fields": {
+      "project": 11,
+      "phase": "TRAVAUX",
+      "etat": "a_faire",
+      "commentaire": "",
+      "deadline": null,
+      "file": ""
+    }
+  },
+  {
+    "model": "projects.payment",
+    "pk": 1,
+    "fields": {
+      "project": 25,
+      "numero": 1,
+      "declenchement": "A la signature de contrat de maîtrise d’œuvre",
+      "montant": 8500000,
+      "date_echeance": null,
+      "date_encaissement": null
+    }
+  },
+  {
+    "model": "projects.payment",
+    "pk": 2,
+    "fields": {
+      "project": 25,
+      "numero": 2,
+      "declenchement": "A la remise de l’Avant -projet",
+      "montant": 10000000,
+      "date_echeance": null,
+      "date_encaissement": null
+    }
+  },
+  {
+    "model": "projects.payment",
+    "pk": 3,
+    "fields": {
+      "project": 25,
+      "numero": 3,
+      "declenchement": "A la remise du Projet définitif et Instruction du Permis de Construire",
+      "montant": 5000000,
+      "date_echeance": null,
+      "date_encaissement": null
+    }
+  },
+  {
+    "model": "projects.payment",
+    "pk": 4,
+    "fields": {
+      "project": 25,
+      "numero": 4,
+      "declenchement": "A la remise des Plans d’exécution, devis quantitatif et estimatif des travaux",
+      "montant": 9000000,
+      "date_echeance": null,
+      "date_encaissement": null
+    }
+  },
+  {
+    "model": "projects.payment",
+    "pk": 5,
+    "fields": {
+      "project": 25,
+      "numero": 5,
+      "declenchement": "A la notification de démarrage des travaux",
+      "montant": 5000000,
+      "date_echeance": null,
+      "date_encaissement": null
+    }
+  },
+  {
+    "model": "projects.payment",
+    "pk": 6,
+    "fields": {
+      "project": 25,
+      "numero": 6,
+      "declenchement": "Solde par décomptes mensuels suivant avancement des travaux",
+      "montant": 15000000,
+      "date_echeance": null,
+      "date_encaissement": null
+    }
+  }
+]

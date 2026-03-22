@@ -1,0 +1,26 @@
+# Environment
+.env
+
+# Database
+db.sqlite3
+
+# Uploaded files
+uploads/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Static collected
+staticfiles/
+
+# IDE
+.vscode/
+.idea/
+*.swp
