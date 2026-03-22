@@ -5,7 +5,8 @@
 db.sqlite3
 
 # Uploaded files
-uploads/
+uploads/*
+!uploads/.gitkeep
 
 # Python
 __pycache__/
