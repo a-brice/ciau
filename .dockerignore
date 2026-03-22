@@ -2,8 +2,6 @@ env/
 docs/
 *.xlsx
 
-ciau/.env
-ciau/db.sqlite3
 ciau/uploads/
 ciau/__pycache__/
 ciau/**/__pycache__/
