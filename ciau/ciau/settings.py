@@ -18,6 +18,8 @@ APP_PASSWORD = os.environ.get('APP_PASSWORD', '')
 
 ALLOWED_HOSTS = ['*']
 
+CSRF_TRUSTED_ORIGINS = ['https://ciau.proctor-iq.com']
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
