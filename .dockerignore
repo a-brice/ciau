@@ -6,4 +6,3 @@ ciau/uploads/
 ciau/__pycache__/
 ciau/**/__pycache__/
 ciau/**/*.pyc
-ciau/static/

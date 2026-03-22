@@ -7,4 +7,5 @@ services:
       - ./ciau/.env:/app/.env:ro
       - ./ciau/db.sqlite3:/app/db.sqlite3
       - ./ciau/uploads:/app/uploads
+      - ./ciau/static:/app/static
     restart: unless-stopped
